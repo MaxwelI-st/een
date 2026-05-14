@@ -81,3 +81,14 @@ client.on("messageCreate", async (message) => {
 });
 
 client.login(process.env.BOT_TOKEN);
+
+// ── Render用ダミーサーバー ──
+// RenderのWeb Serviceはポート(PORT)を使用しないとデプロイエラーになるため追加
+import http from "http";
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Bot is running!");
+}).listen(PORT, () => {
+  console.log(`✅ ダミーサーバー起動 (Port: ${PORT})`);
+});
